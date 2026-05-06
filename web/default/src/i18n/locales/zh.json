@@ -4310,6 +4310,24 @@
     "Unset price": "未设置价格",
     "Use the full-width table to scan prices, then select a row to edit it here.": "先在表格中快速浏览价格，然后选择一行在这里编辑。",
     "extras": "额外项",
-    "tiers": "档"
+    "tiers": "档",
+    "24h": "24 小时",
+    "Critical": "严重",
+    "Failed to load model health": "加载模型健康度失败",
+    "Healthy Models": "健康模型",
+    "Hourly Health": "小时健康度",
+    "Loading model health...": "正在加载模型健康度...",
+    "Model Health": "模型健康度",
+    "Monitored Models": "监控模型",
+    "No model health data found": "未找到模型健康度数据",
+    "Overall Success Rate": "整体成功率",
+    "Public status": "公共状态",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "最近 24 小时来自实时请求日志的模型可用性，包括成功和失败请求。",
+    "Requests": "请求",
+    "Slices": "切片",
+    "Success Rate": "成功率",
+    "Success rate is calculated by active five-minute slices.": "成功率按活跃的 5 分钟切片计算。",
+    "Successful Tokens": "成功 Token",
+    "Window": "时间窗口"
   }
 }

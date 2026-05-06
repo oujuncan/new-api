@@ -4310,6 +4310,24 @@
     "Unset price": "Unset price",
     "Use the full-width table to scan prices, then select a row to edit it here.": "Use the full-width table to scan prices, then select a row to edit it here.",
     "extras": "extras",
-    "tiers": "tiers"
+    "tiers": "tiers",
+    "24h": "24h",
+    "Critical": "Critical",
+    "Failed to load model health": "Failed to load model health",
+    "Healthy Models": "Healthy Models",
+    "Hourly Health": "Hourly Health",
+    "Loading model health...": "Loading model health...",
+    "Model Health": "Model Health",
+    "Monitored Models": "Monitored Models",
+    "No model health data found": "No model health data found",
+    "Overall Success Rate": "Overall Success Rate",
+    "Public status": "Public status",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "Recent 24-hour model availability from live request logs, including successful and failed requests.",
+    "Requests": "Requests",
+    "Slices": "Slices",
+    "Success Rate": "Success Rate",
+    "Success rate is calculated by active five-minute slices.": "Success rate is calculated by active five-minute slices.",
+    "Successful Tokens": "Successful Tokens",
+    "Window": "Window"
   }
 }

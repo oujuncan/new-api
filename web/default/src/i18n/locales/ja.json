@@ -4310,6 +4310,24 @@
     "Unset price": "価格未設定",
     "Use the full-width table to scan prices, then select a row to edit it here.": "表で価格を確認し、行を選択してここで編集します。",
     "extras": "追加項目",
-    "tiers": "階層"
+    "tiers": "階層",
+    "24h": "24時間",
+    "Critical": "重大",
+    "Failed to load model health": "モデル健全性の読み込みに失敗しました",
+    "Healthy Models": "健全なモデル",
+    "Hourly Health": "時間別健全性",
+    "Loading model health...": "モデル健全性を読み込み中...",
+    "Model Health": "モデル健全性",
+    "Monitored Models": "監視中のモデル",
+    "No model health data found": "モデル健全性データが見つかりません",
+    "Overall Success Rate": "全体成功率",
+    "Public status": "公開ステータス",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "成功リクエストと失敗リクエストを含むライブリクエストログから、直近24時間のモデル可用性を表示します。",
+    "Requests": "リクエスト",
+    "Slices": "スライス",
+    "Success Rate": "成功率",
+    "Success rate is calculated by active five-minute slices.": "成功率はアクティブな5分スライス単位で計算されます。",
+    "Successful Tokens": "成功トークン",
+    "Window": "期間"
   }
 }

@@ -4310,6 +4310,24 @@
     "Unset price": "Цена не задана",
     "Use the full-width table to scan prices, then select a row to edit it here.": "Просмотрите цены в таблице, затем выберите строку для редактирования здесь.",
     "extras": "доп. пункты",
-    "tiers": "уровни"
+    "tiers": "уровни",
+    "24h": "24 ч",
+    "Critical": "Критично",
+    "Failed to load model health": "Не удалось загрузить состояние моделей",
+    "Healthy Models": "Исправные модели",
+    "Hourly Health": "Состояние по часам",
+    "Loading model health...": "Загрузка состояния моделей...",
+    "Model Health": "Состояние моделей",
+    "Monitored Models": "Отслеживаемые модели",
+    "No model health data found": "Данные о состоянии моделей не найдены",
+    "Overall Success Rate": "Общий процент успеха",
+    "Public status": "Публичный статус",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "Доступность моделей за последние 24 часа по журналам живых запросов, включая успешные и неудачные запросы.",
+    "Requests": "Запросы",
+    "Slices": "Интервалы",
+    "Success Rate": "Процент успеха",
+    "Success rate is calculated by active five-minute slices.": "Процент успеха рассчитывается по активным пятиминутным интервалам.",
+    "Successful Tokens": "Успешные токены",
+    "Window": "Окно"
   }
 }

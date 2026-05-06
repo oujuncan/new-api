@@ -4310,6 +4310,24 @@
     "Unset price": "Prix non défini",
     "Use the full-width table to scan prices, then select a row to edit it here.": "Parcourez les prix dans le tableau, puis sélectionnez une ligne pour la modifier ici.",
     "extras": "suppléments",
-    "tiers": "paliers"
+    "tiers": "paliers",
+    "24h": "24 h",
+    "Critical": "Critique",
+    "Failed to load model health": "Échec du chargement de la santé des modèles",
+    "Healthy Models": "Modèles sains",
+    "Hourly Health": "Santé horaire",
+    "Loading model health...": "Chargement de la santé des modèles...",
+    "Model Health": "Santé des modèles",
+    "Monitored Models": "Modèles surveillés",
+    "No model health data found": "Aucune donnée de santé de modèle trouvée",
+    "Overall Success Rate": "Taux de réussite global",
+    "Public status": "Statut public",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "Disponibilité des modèles sur les dernières 24 heures d'après les journaux de requêtes en direct, incluant les requêtes réussies et échouées.",
+    "Requests": "Requêtes",
+    "Slices": "Tranches",
+    "Success Rate": "Taux de réussite",
+    "Success rate is calculated by active five-minute slices.": "Le taux de réussite est calculé par tranches actives de cinq minutes.",
+    "Successful Tokens": "Jetons réussis",
+    "Window": "Fenêtre"
   }
 }

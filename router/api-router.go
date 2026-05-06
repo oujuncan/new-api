@@ -30,6 +30,10 @@ func SetApiRouter(router *gin.Engine) {
 		apiRouter.GET("/about", controller.GetAbout)
 		//apiRouter.GET("/midjourney", controller.GetMidjourney)
 		apiRouter.GET("/home_page_content", controller.GetHomePageContent)
+		publicRoute := apiRouter.Group("/public")
+		{
+			publicRoute.GET("/model_health/hourly_last24h", controller.GetPublicModelHealthHourlyLast24h)
+		}
 		apiRouter.GET("/pricing", middleware.TryUserAuth(), controller.GetPricing)
 		apiRouter.GET("/perf-metrics", middleware.TryUserAuth(), controller.GetPerfMetrics)
 		apiRouter.GET("/verification", middleware.EmailVerificationRateLimit(), middleware.TurnstileCheck(), controller.SendEmailVerification)

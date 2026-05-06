@@ -4310,6 +4310,24 @@
     "Unset price": "Chưa đặt giá",
     "Use the full-width table to scan prices, then select a row to edit it here.": "Duyệt giá trong bảng, rồi chọn một hàng để chỉnh sửa tại đây.",
     "extras": "mục bổ sung",
-    "tiers": "tầng"
+    "tiers": "tầng",
+    "24h": "24 giờ",
+    "Critical": "Nghiêm trọng",
+    "Failed to load model health": "Không tải được tình trạng model",
+    "Healthy Models": "Model khỏe mạnh",
+    "Hourly Health": "Tình trạng theo giờ",
+    "Loading model health...": "Đang tải tình trạng model...",
+    "Model Health": "Tình trạng model",
+    "Monitored Models": "Model được giám sát",
+    "No model health data found": "Không tìm thấy dữ liệu tình trạng model",
+    "Overall Success Rate": "Tỷ lệ thành công tổng thể",
+    "Public status": "Trạng thái công khai",
+    "Recent 24-hour model availability from live request logs, including successful and failed requests.": "Mức sẵn sàng của model trong 24 giờ gần đây từ nhật ký yêu cầu trực tiếp, bao gồm yêu cầu thành công và thất bại.",
+    "Requests": "Yêu cầu",
+    "Slices": "Lát thời gian",
+    "Success Rate": "Tỷ lệ thành công",
+    "Success rate is calculated by active five-minute slices.": "Tỷ lệ thành công được tính theo các lát năm phút có hoạt động.",
+    "Successful Tokens": "Token thành công",
+    "Window": "Cửa sổ"
   }
 }
