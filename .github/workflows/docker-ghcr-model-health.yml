@@ -12,9 +12,19 @@ on:
         default: "model-health"
 
 jobs:
-  build:
-    name: Build and push GHCR image
-    runs-on: ubuntu-latest
+  build_single_arch:
+    name: Build and push GHCR image (${{ matrix.arch }}) [native]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-latest
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
       packages: write
@@ -35,9 +45,6 @@ jobs:
           echo "safe_tag=$SAFE_TAG" >> "$GITHUB_OUTPUT"
           echo "$SAFE_TAG-$SHORT_SHA" > VERSION
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -54,25 +61,77 @@ jobs:
         with:
           images: ${{ steps.meta-vars.outputs.image }}
           tags: |
-            type=raw,value=${{ steps.meta-vars.outputs.safe_tag }}
-            type=raw,value=${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}
+            type=raw,value=${{ steps.meta-vars.outputs.safe_tag }}-${{ matrix.arch }}
+            type=raw,value=${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}-${{ matrix.arch }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platform }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=model-health-${{ matrix.arch }}
+          cache-to: type=gha,scope=model-health-${{ matrix.arch }},mode=max
           provenance: false
           sbom: false
 
       - name: Summary
         run: |
-          echo "### Published image" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Published image (${{ matrix.arch }})" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           echo "${{ steps.meta.outputs.tags }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+  create_manifests:
+    name: Create GHCR multi-arch manifests
+    needs: [build_single_arch]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Prepare image metadata
+        id: meta-vars
+        run: |
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}"
+          SHORT_SHA="$(git rev-parse --short HEAD)"
+          RAW_TAG="${{ github.event.inputs.tag || 'model-health' }}"
+          SAFE_TAG="$(echo "$RAW_TAG" | tr '/[:upper:]' '-[:lower:]' | sed 's/[^a-z0-9_.-]/-/g')"
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+          echo "short_sha=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          echo "safe_tag=$SAFE_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push manifest (tag)
+        run: |
+          docker buildx imagetools create \
+            -t "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}" \
+            "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-amd64" \
+            "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-arm64"
+
+      - name: Create and push manifest (tag + short sha)
+        run: |
+          docker buildx imagetools create \
+            -t "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}" \
+            "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}-amd64" \
+            "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}-arm64"
+
+      - name: Summary
+        run: |
+          echo "### Published multi-arch images" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.meta-vars.outputs.image }}:${{ steps.meta-vars.outputs.safe_tag }}-${{ steps.meta-vars.outputs.short_sha }}" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
