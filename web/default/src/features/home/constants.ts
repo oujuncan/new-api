@@ -60,70 +60,76 @@ export const GATEWAY_FEATURES = [
 // Stats section - Default statistics
 export const DEFAULT_STATS = [
   {
-    value: '50',
+    value: '10',
     suffix: '+',
-    description: 'upstream services integrated',
+    description: 'AI providers integrated',
   },
   {
-    value: '100',
+    value: '200',
     suffix: '+',
-    description: 'model billing support',
+    description: 'models available',
+  },
+  {
+    value: '99.9',
+    suffix: '%',
+    description: 'service uptime',
   },
   {
     value: '50',
     suffix: '+',
     description: 'compatible API routes',
   },
-  {
-    value: '10',
-    suffix: '+',
-    description: 'scheduling controls',
-  },
 ] as const
 
 // Features section - Default features
 export const DEFAULT_FEATURES = [
   {
-    title: 'Lightning Fast',
+    title: 'Global Model Unified Access',
     description:
-      'Optimized network architecture ensures millisecond response times',
-    iconName: 'Zap',
+      'One platform covering ChatGPT, Claude, Gemini, DeepSeek, Qwen and more — text, image, and video capabilities all supported.',
+    iconName: 'KeyRound',
   },
   {
-    title: 'Secure & Reliable',
+    title: 'One Key for All Models',
     description:
-      'Enterprise-grade security with comprehensive permission management',
-    iconName: 'Shield',
-  },
-  {
-    title: 'Global Coverage',
-    description: 'Multi-region deployment for stable global access',
-    iconName: 'Globe',
-  },
-  {
-    title: 'Developer Friendly',
-    description: 'Compatible API routes for common AI application workflows',
+      'Call all models with a single API key — no need to maintain multiple accounts and credential systems.',
     iconName: 'Code',
   },
   {
-    title: 'High Performance',
-    description: 'Support for high concurrency with automatic load balancing',
-    iconName: 'Gauge',
+    title: 'Enterprise Stability & Control',
+    description:
+      '99.9% service availability with token-level permissions and budget control for every call.',
+    iconName: 'Shield',
   },
   {
-    title: 'Transparent Billing',
-    description: 'Pay-as-you-go with real-time usage monitoring',
-    iconName: 'DollarSign',
+    title: 'Payment & Invoicing Compliance',
+    description:
+      'RMB settlement with official VAT invoices — solving the compliance and financial booking challenges of overseas AI services.',
+    iconName: 'ReceiptText',
   },
   {
-    title: 'Team Collaboration',
-    description: 'Multi-user management with flexible permission allocation',
-    iconName: 'Users',
+    title: 'Permission Isolation',
+    description:
+      'Different projects use independent tokens with clear boundaries',
+    iconName: 'Lock',
   },
   {
-    title: 'Open Source',
-    description: 'Community driven, self-hosted, and extensible',
-    iconName: 'HeartHandshake',
+    title: 'Cost Transparency',
+    description:
+      'Usage and costs are fully trackable, supporting allocation by department or project',
+    iconName: 'Eye',
+  },
+  {
+    title: 'Budget Control',
+    description:
+      'Per-member limits to prevent any single user or app from over-consuming',
+    iconName: 'Wallet',
+  },
+  {
+    title: 'Quick Troubleshooting',
+    description:
+      'Pinpoint anomaly spikes and error calls precisely by time dimension',
+    iconName: 'Search',
   },
 ] as const
 

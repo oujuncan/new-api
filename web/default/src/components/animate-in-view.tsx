@@ -47,7 +47,6 @@ export function AnimateInView(props: AnimateInViewProps) {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mq.matches) {
       el.classList.remove('opacity-0')
-      el.classList.add(`landing-animate-${animation}`)
       return
     }
 

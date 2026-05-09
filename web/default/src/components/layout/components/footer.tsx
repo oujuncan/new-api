@@ -24,7 +24,7 @@ import { useSystemConfig } from '@/hooks/use-system-config'
 
 interface FooterLink {
   text: string
-  href: string
+  href?: string
 }
 
 interface FooterColumnProps {
@@ -40,16 +40,17 @@ interface FooterProps {
   className?: string
 }
 
-const NEW_API_FOOTER_ATTRIBUTION_KEY = [
-  'footer',
-  'new' + 'api',
-  'projectAttributionSuffix',
-].join('.')
-
 function FooterLinkItem(props: { link: FooterLink }) {
   const { t } = useTranslation()
-  const isExternal = props.link.href.startsWith('http')
   const label = t(props.link.text)
+
+  if (!props.link.href) {
+    return (
+      <span className='text-muted-foreground text-sm'>{label}</span>
+    )
+  }
+
+  const isExternal = props.link.href.startsWith('http')
 
   if (isExternal) {
     return (
@@ -74,92 +75,42 @@ function FooterLinkItem(props: { link: FooterLink }) {
   )
 }
 
-function ProjectAttribution(props: { currentYear: number }) {
-  const { t } = useTranslation()
-
-  return (
-    <div className='text-muted-foreground/45 text-center text-xs sm:text-right'>
-      <span className='text-muted-foreground/45'>
-        &copy; {props.currentYear}{' '}
-        <a
-          href='https://github.com/QuantumNous/new-api'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='text-foreground/70 hover:text-foreground font-medium transition-colors'
-        >
-          {t('New API')}
-        </a>
-        . {t(NEW_API_FOOTER_ATTRIBUTION_KEY)}
-      </span>
-    </div>
-  )
-}
-
 export function Footer(props: FooterProps) {
   const { t } = useTranslation()
   const {
     systemName,
     logo: systemLogo,
     footerHtml,
-    demoSiteEnabled,
   } = useSystemConfig()
 
   const displayLogo = systemLogo || props.logo || '/logo.png'
   const displayName = systemName || props.name || 'New API'
-  const isDemoSiteMode = Boolean(demoSiteEnabled)
   const currentYear = new Date().getFullYear()
 
   const fallbackColumns = useMemo<FooterColumnProps[]>(
     () => [
       {
-        title: t('footer.columns.about.title'),
+        title: t('footer.columns.product.title'),
         links: [
-          {
-            text: t('footer.columns.about.links.aboutProject'),
-            href: 'https://docs.newapi.pro/wiki/project-introduction/',
-          },
-          {
-            text: t('footer.columns.about.links.contact'),
-            href: 'https://docs.newapi.pro/support/community-interaction/',
-          },
-          {
-            text: t('footer.columns.about.links.features'),
-            href: 'https://docs.newapi.pro/wiki/features-introduction/',
-          },
+          { text: t('footer.columns.product.links.dashboard'), href: '/dashboard' },
+          { text: t('footer.columns.product.links.pricing'), href: '/pricing' },
+          { text: t('footer.columns.product.links.models'), href: '/models' },
         ],
       },
       {
-        title: t('footer.columns.docs.title'),
+        title: t('footer.columns.support.title'),
         links: [
-          {
-            text: t('footer.columns.docs.links.quickStart'),
-            href: 'https://docs.newapi.pro/getting-started/',
-          },
-          {
-            text: t('footer.columns.docs.links.installation'),
-            href: 'https://docs.newapi.pro/installation/',
-          },
-          {
-            text: t('footer.columns.docs.links.apiDocs'),
-            href: 'https://docs.newapi.pro/api/',
-          },
+          { text: t('footer.columns.support.links.quickStart'), href: '/about' },
+          { text: t('footer.columns.support.links.features'), href: '/about' },
         ],
       },
       {
-        title: t('footer.columns.related.title'),
+        title: t('footer.columns.compatible.title'),
         links: [
-          {
-            text: t('footer.columns.related.links.oneApi'),
-            href: 'https://github.com/songquanpeng/one-api',
-          },
-          {
-            text: t('footer.columns.related.links.midjourney'),
-            href: 'https://github.com/novicezk/midjourney-proxy',
-          },
-          {
-            text: t('footer.columns.related.links.neko'),
-            href: 'https://github.com/Calcium-Ion/neko-api-key-tool',
-          },
+          { text: 'OpenAI API' },
+          { text: 'Anthropic API' },
+          { text: 'Gemini API' },
+          { text: 'OpenAI Responses API' },
         ],
       },
     ],
@@ -183,7 +134,9 @@ export function Footer(props: FooterProps) {
               dangerouslySetInnerHTML={{ __html: footerHtml }}
             />
             <div className='border-border/60 w-full border-t pt-4 sm:w-auto sm:border-t-0 sm:border-l sm:pt-0 sm:pl-5'>
-              <ProjectAttribution currentYear={currentYear} />
+              <span className='text-muted-foreground/60 text-xs'>
+                {t('footer.poweredBy', { name: displayName })}
+              </span>
             </div>
           </div>
         </div>
@@ -205,43 +158,44 @@ export function Footer(props: FooterProps) {
                 alt={displayName}
                 className='size-7 rounded-lg object-contain'
               />
-              <span className='text-sm font-semibold tracking-tight'>
+              <span className='text-base font-semibold tracking-tight'>
                 {displayName}
               </span>
             </Link>
-            <p className='text-muted-foreground/60 mt-3 max-w-[200px] text-xs leading-relaxed'>
-              {t('Powerful API Management Platform')}
-            </p>
+            <div className='text-muted-foreground mt-4 max-w-[240px] space-y-1 text-sm leading-relaxed'>
+              <p>{t('footer.brand.description')}</p>
+              <p>{t('footer.brand.tagline')}</p>
+            </div>
           </div>
 
           {/* Links columns */}
-          {isDemoSiteMode && (
-            <div className='grid grid-cols-3 gap-8 md:gap-16'>
-              {displayColumns.map((column, index) => (
-                <div key={index}>
-                  <p className='text-muted-foreground/50 mb-3 text-xs font-medium tracking-wider uppercase'>
-                    {t(column.title)}
-                  </p>
-                  <ul className='space-y-2.5'>
-                    {column.links.map((link, linkIndex) => (
-                      <li key={linkIndex}>
-                        <FooterLinkItem link={link} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className='grid grid-cols-2 gap-8 sm:grid-cols-3 md:gap-16'>
+            {displayColumns.map((column, index) => (
+              <div key={index}>
+                <p className='text-foreground mb-4 text-sm font-semibold'>
+                  {t(column.title)}
+                </p>
+                <ul className='space-y-3'>
+                  {column.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <FooterLinkItem link={link} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom section */}
         <div className='border-border/30 mt-12 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row'>
-          <p className='text-muted-foreground/40 text-xs'>
+          <p className='text-muted-foreground text-xs'>
             &copy; {currentYear} {displayName}.{' '}
             {props.copyright ?? t('footer.defaultCopyright')}
           </p>
-          <ProjectAttribution currentYear={currentYear} />
+          <span className='text-muted-foreground/60 text-xs'>
+            {t('footer.poweredBy', { name: displayName })}
+          </span>
         </div>
       </div>
     </footer>

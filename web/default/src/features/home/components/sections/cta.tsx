@@ -52,21 +52,35 @@ export function CTA(props: CTAProps) {
         className='mx-auto max-w-2xl text-center'
         animation='scale-in'
       >
-        <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
-          {t('Ready to simplify')}
+        <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
+          {t("Don't let AI model capabilities")}
           <br />
           <span className='bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent'>
-            {t('your AI integration?')}
+            {t('become a bottleneck for your growth')}
           </span>
         </h2>
-        <p className='text-muted-foreground/80 mx-auto mt-5 max-w-md text-sm leading-relaxed md:text-base'>
+        <p className='text-muted-foreground mx-auto mt-4 max-w-md text-sm leading-relaxed md:text-base'>
           {t(
-            'Deploy your own gateway and start routing requests through your configured upstream services.'
+            'The preferred AI Token aggregation platform for enterprises'
           )}
         </p>
+        <div className='text-muted-foreground mx-auto mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm'>
+          <span className='flex items-center gap-1.5'>
+            <span className='inline-block size-1.5 rounded-full bg-emerald-500' />
+            {t('Bulk Procurement')}
+          </span>
+          <span className='flex items-center gap-1.5'>
+            <span className='inline-block size-1.5 rounded-full bg-blue-500' />
+            {t('Technical Support')}
+          </span>
+          <span className='flex items-center gap-1.5'>
+            <span className='inline-block size-1.5 rounded-full bg-violet-500' />
+            {t('Tax Compliance')}
+          </span>
+        </div>
         <div className='mt-8 flex items-center justify-center gap-3'>
           <Button className='group rounded-lg' render={<Link to='/sign-up' />}>
-            {t('Get Started')}
+            {t('Get Started Now')}
             <ArrowRight className='ml-1 size-3.5 transition-transform duration-200 group-hover:translate-x-0.5' />
           </Button>
           <Button

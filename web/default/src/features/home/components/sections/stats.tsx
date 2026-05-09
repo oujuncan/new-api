@@ -98,15 +98,15 @@ export function Stats(_props: StatsProps) {
   const { t } = useTranslation()
 
   const stats: StatItem[] = [
-    { end: 50, suffix: '+', label: t('upstream services integrated') },
-    { end: 100, suffix: '+', label: t('model billing support') },
+    { end: 10, suffix: '+', label: t('AI providers integrated') },
+    { end: 200, suffix: '+', label: t('models available') },
+    { end: 99.9, suffix: '%', label: t('service uptime'), decimals: 1 },
     { end: 50, suffix: '+', label: t('compatible API routes') },
-    { end: 10, suffix: '+', label: t('scheduling controls') },
   ]
 
   return (
-    <div className='border-border/40 bg-muted/10 relative z-10 border-y'>
-      <div className='mx-auto max-w-6xl px-6 py-10 md:py-12'>
+    <div className='border-border/40 bg-muted/30 relative z-10 border-y dark:bg-muted/10'>
+      <div className='mx-auto max-w-6xl px-6 py-14 md:py-16'>
         <div className='grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
           {stats.map((s) => (
             <div
